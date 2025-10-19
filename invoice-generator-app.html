@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create professional invoices in under 60 seconds. Free invoice generator for freelancers and small businesses. No signup required.">
+    <meta name="keywords" content="free invoice generator, invoice template, create invoice online, freelancer invoice, invoice maker">
+    <title>InvoiceQuick - Free Invoice Generator for Freelancers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-purple-50 to-blue-50 min-h-screen">
+    <!-- Header -->
+    <header class="no-print bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                    ⚡ InvoiceQuick
+                </h1>
+                <div class="text-sm text-gray-600">
+                    <span class="font-semibold">100% Free</span> • No Signup Required
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="no-print max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        <div class="text-center mb-8">
+            <h2 class="text-4xl font-bold text-gray-900 mb-3">Create Professional Invoices in 60 Seconds</h2>
+            <p class="text-xl text-gray-600">Simple, fast, and completely free. Perfect for freelancers.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 pb-12 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Input Form -->
+            <div class="no-print bg-white rounded-xl shadow-lg p-6 space-y-6">
+                <h3 class="text-2xl font-bold text-gray-800 border-b pb-3">Invoice Details</h3>
+                
+                <!-- Your Business Info -->
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-gray-700 flex items-center">
+                        <span class="bg-purple-100 text-purple-700 rounded-full w-6 h-6 flex items-center justify-center text-sm mr-2">1</span>
+                        Your Business Info
+                    </h4>
+                    <input type="text" id="business-name" placeholder="Your Business/Name *" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    <input type="email" id="business-email" placeholder="your@email.com *" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    <input type="text" id="business-address" placeholder="Your Address (Optional)" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    <input type="tel" id="business-phone" placeholder="Phone Number (Optional)" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+
+                <!-- Client Info -->
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-gray-700 flex items-center">
+                        <span class="bg-purple-100 text-purple-700 rounded-full w-6 h-6 flex items-center justify-center text-sm mr-2">2</span>
+                        Client Info
+                    </h4>
+                    <input type="text" id="client-name" placeholder="Client Name/Company *" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    <input type="email" id="client-email" placeholder="client@email.com (Optional)" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    <input type="text" id="client-address" placeholder="Client Address (Optional)" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+
+                <!-- Invoice Info -->
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-gray-700 flex items-center">
+                        <span class="bg-purple-100 text-purple-700 rounded-full w-6 h-6 flex items-center justify-center text-sm mr-2">3</span>
+                        Invoice Details
+                    </h4>
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" id="invoice-number" placeholder="Invoice #" 
+                               class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                        <input type="date" id="invoice-date" 
+                               class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                    <input type="date" id="due-date" placeholder="Due Date (Optional)" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+
+                <!-- Line Items -->
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-gray-700 flex items-center justify-between">
+                        <span class="flex items-center">
+                            <span class="bg-purple-100 text-purple-700 rounded-full w-6 h-6 flex items-center justify-center text-sm mr-2">4</span>
+                            Services/Items
+                        </span>
+                        <button id="add-item-btn" class="text-sm bg-purple-500 text-white px-3 py-1 rounded-lg hover:bg-purple-600">
+                            + Add Item
+                        </button>
+                    </h4>
+                    <div id="line-items" class="space-y-3"></div>
+                </div>
+
+                <!-- Tax & Notes -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4">
+                        <input type="number" id="tax-rate" placeholder="Tax %" step="0.01" min="0"
+                               class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                        <input type="number" id="discount" placeholder="Discount ($)" step="0.01" min="0"
+                               class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                    <textarea id="notes" placeholder="Payment instructions, notes, thank you message..." rows="3"
+                              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"></textarea>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-3 pt-4">
+                    <button id="preview-btn" class="flex-1 bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+                        Preview Invoice
+                    </button>
+                    <button id="download-btn" class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                        Download PDF
+                    </button>
+                </div>
+            </div>
+
+            <!-- Invoice Preview -->
+            <div class="bg-white rounded-xl shadow-lg p-8" id="invoice-preview">
+                <div class="text-center text-gray-400 py-20">
+                    <svg class="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <p class="text-lg">Your invoice preview will appear here</p>
+                    <p class="text-sm mt-2">Fill in the details and click "Preview Invoice"</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="no-print bg-white border-t mt-12">
+        <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+            <div class="text-center text-gray-600">
+                <p class="mb-2">⚡ <strong>InvoiceQuick</strong> - Free Invoice Generator for Freelancers</p>
+                <p class="text-sm">Create unlimited professional invoices. No signup. No watermarks. Always free.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize invoice number and date
+        document.getElementById('invoice-number').value = 'INV-' + Date.now().toString().slice(-6);
+        document.getElementById('invoice-date').value = new Date().toISOString().split('T')[0];
+
+        // Line items management
+        let itemCount = 0;
+
+        function addLineItem() {
+            itemCount++;
+            const itemsContainer = document.getElementById('line-items');
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'flex gap-2 items-start';
+            itemDiv.innerHTML = `
+                <input type="text" placeholder="Service/Item description" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg item-description">
+                <input type="number" placeholder="Qty" min="1" value="1" class="w-20 px-3 py-2 border border-gray-300 rounded-lg item-quantity">
+                <input type="number" placeholder="Rate" step="0.01" min="0" class="w-24 px-3 py-2 border border-gray-300 rounded-lg item-rate">
+                <button class="text-red-500 hover:text-red-700 p-2 remove-item">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                </button>
+            `;
+            itemsContainer.appendChild(itemDiv);
+
+            itemDiv.querySelector('.remove-item').addEventListener('click', function() {
+                itemDiv.remove();
+            });
+        }
+
+        // Add first item automatically
+        addLineItem();
+
+        document.getElementById('add-item-btn').addEventListener('click', addLineItem);
+
+        function generateInvoiceHTML() {
+            // Get all values
+            const businessName = document.getElementById('business-name').value || 'Your Business';
+            const businessEmail = document.getElementById('business-email').value;
+            const businessAddress = document.getElementById('business-address').value;
+            const businessPhone = document.getElementById('business-phone').value;
+            
+            const clientName = document.getElementById('client-name').value || 'Client Name';
+            const clientEmail = document.getElementById('client-email').value;
+            const clientAddress = document.getElementById('client-address').value;
+            
+            const invoiceNumber = document.getElementById('invoice-number').value;
+            const invoiceDate = document.getElementById('invoice-date').value;
+            const dueDate = document.getElementById('due-date').value;
+            
+            const taxRate = parseFloat(document.getElementById('tax-rate').value) || 0;
+            const discount = parseFloat(document.getElementById('discount').value) || 0;
+            const notes = document.getElementById('notes').value;
+
+            // Get line items
+            const items = [];
+            document.querySelectorAll('#line-items > div').forEach(div => {
+                const description = div.querySelector('.item-description').value;
+                const quantity = parseFloat(div.querySelector('.item-quantity').value) || 0;
+                const rate = parseFloat(div.querySelector('.item-rate').value) || 0;
+                if (description && quantity && rate) {
+                    items.push({ description, quantity, rate, amount: quantity * rate });
+                }
+            });
+
+            // Calculate totals
+            const subtotal = items.reduce((sum, item) => sum + item.amount, 0);
+            const taxAmount = (subtotal * taxRate) / 100;
+            const total = subtotal + taxAmount - discount;
+
+            // Generate HTML
+            return `
+                <div class="bg-white p-8 max-w-4xl mx-auto" style="font-family: Arial, sans-serif;">
+                    <!-- Header -->
+                    <div class="flex justify-between items-start mb-8 border-b-4 border-purple-600 pb-6">
+                        <div>
+                            <h1 class="text-4xl font-bold text-gray-800 mb-2">${businessName}</h1>
+                            ${businessEmail ? `<p class="text-gray-600">${businessEmail}</p>` : ''}
+                            ${businessAddress ? `<p class="text-gray-600">${businessAddress}</p>` : ''}
+                            ${businessPhone ? `<p class="text-gray-600">${businessPhone}</p>` : ''}
+                        </div>
+                        <div class="text-right">
+                            <h2 class="text-3xl font-bold text-purple-600 mb-2">INVOICE</h2>
+                            <p class="text-gray-600"><strong>#${invoiceNumber}</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- Bill To & Dates -->
+                    <div class="grid grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <h3 class="text-sm font-bold text-gray-500 uppercase mb-2">Bill To:</h3>
+                            <p class="text-lg font-semibold text-gray-800">${clientName}</p>
+                            ${clientEmail ? `<p class="text-gray-600">${clientEmail}</p>` : ''}
+                            ${clientAddress ? `<p class="text-gray-600">${clientAddress}</p>` : ''}
+                        </div>
+                        <div class="text-right">
+                            <p class="text-gray-600 mb-1"><strong>Invoice Date:</strong> ${invoiceDate}</p>
+                            ${dueDate ? `<p class="text-gray-600"><strong>Due Date:</strong> ${dueDate}</p>` : ''}
+                        </div>
+                    </div>
+
+                    <!-- Line Items Table -->
+                    <table class="w-full mb-8">
+                        <thead>
+                            <tr class="bg-gray-100 border-b-2 border-gray-300">
+                                <th class="text-left py-3 px-4 font-semibold text-gray-700">Description</th>
+                                <th class="text-center py-3 px-4 font-semibold text-gray-700">Qty</th>
+                                <th class="text-right py-3 px-4 font-semibold text-gray-700">Rate</th>
+                                <th class="text-right py-3 px-4 font-semibold text-gray-700">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${items.map(item => `
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 text-gray-700">${item.description}</td>
+                                    <td class="py-3 px-4 text-center text-gray-700">${item.quantity}</td>
+                                    <td class="py-3 px-4 text-right text-gray-700">$${item.rate.toFixed(2)}</td>
+                                    <td class="py-3 px-4 text-right text-gray-700">$${item.amount.toFixed(2)}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+
+                    <!-- Totals -->
+                    <div class="flex justify-end mb-8">
+                        <div class="w-64">
+                            <div class="flex justify-between py-2 border-b border-gray-200">
+                                <span class="text-gray-600">Subtotal:</span>
+                                <span class="font-semibold text-gray-800">$${subtotal.toFixed(2)}</span>
+                            </div>
+                            ${taxRate > 0 ? `
+                                <div class="flex justify-between py-2 border-b border-gray-200">
+                                    <span class="text-gray-600">Tax (${taxRate}%):</span>
+                                    <span class="font-semibold text-gray-800">$${taxAmount.toFixed(2)}</span>
+                                </div>
+                            ` : ''}
+                            ${discount > 0 ? `
+                                <div class="flex justify-between py-2 border-b border-gray-200">
+                                    <span class="text-gray-600">Discount:</span>
+                                    <span class="font-semibold text-gray-800">-$${discount.toFixed(2)}</span>
+                                </div>
+                            ` : ''}
+                            <div class="flex justify-between py-3 bg-purple-50 px-4 mt-2 rounded-lg">
+                                <span class="text-lg font-bold text-gray-800">Total:</span>
+                                <span class="text-2xl font-bold text-purple-600">$${total.toFixed(2)}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notes -->
+                    ${notes ? `
+                        <div class="border-t border-gray-200 pt-6">
+                            <h3 class="text-sm font-bold text-gray-500 uppercase mb-2">Notes:</h3>
+                            <p class="text-gray-600 whitespace-pre-line">${notes}</p>
+                        </div>
+                    ` : ''}
+
+                    <!-- Footer -->
+                    <div class="text-center mt-12 pt-6 border-t border-gray-200">
+                        <p class="text-gray-500 text-sm">Thank you for your business!</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        document.getElementById('preview-btn').addEventListener('click', function() {
+            const preview = document.getElementById('invoice-preview');
+            preview.innerHTML = generateInvoiceHTML();
+            preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        document.getElementById('download-btn').addEventListener('click', function() {
+            // Validate required fields
+            const businessName = document.getElementById('business-name').value;
+            const businessEmail = document.getElementById('business-email').value;
+            const clientName = document.getElementById('client-name').value;
+            
+            if (!businessName || !businessEmail || !clientName) {
+                alert('Please fill in required fields:\n• Your Business Name\n• Your Email\n• Client Name');
+                return;
+            }
+
+            // Check if there are any line items
+            const items = [];
+            document.querySelectorAll('#line-items > div').forEach(div => {
+                const description = div.querySelector('.item-description').value;
+                const quantity = parseFloat(div.querySelector('.item-quantity').value) || 0;
+                const rate = parseFloat(div.querySelector('.item-rate').value) || 0;
+                if (description && quantity && rate) {
+                    items.push({ description, quantity, rate });
+                }
+            });
+
+            if (items.length === 0) {
+                alert('Please add at least one item/service with description, quantity, and rate.');
+                return;
+            }
+
+            // Generate invoice in preview area
+            const preview = document.getElementById('invoice-preview');
+            preview.innerHTML = generateInvoiceHTML();
+            
+            // Small delay to ensure rendering is complete
+            setTimeout(() => {
+                const opt = {
+                    margin: 0.5,
+                    filename: `invoice-${document.getElementById('invoice-number').value}.pdf`,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2, logging: false },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+
+                html2pdf().set(opt).from(preview).save().then(() => {
+                    // Scroll to preview after download starts
+                    preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
